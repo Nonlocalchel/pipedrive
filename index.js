@@ -50,6 +50,7 @@ app.get('/auth/pipedrive/callback', passport.authenticate('pipedrive', {
 	failureRedirect: '/',
 	successRedirect: '/'
 }));
+
 app.get('/', async (req, res) => {
 	if (req.user.length < 1) {
 		return res.redirect('/auth/pipedrive');
@@ -68,6 +69,27 @@ app.get('/', async (req, res) => {
 		return res.send('Failed to get deals');
 	}
 });
+
+// app.get('/', async (req, res) => {
+// 	if (req.user.length < 1) {
+// 		return res.redirect('/auth/pipedrive');
+// 	}
+
+// 	try {
+// 		const deals = await api.getDeals(req.user[0].access_token);
+// 		const link = "https://www.youtube.com/embed/zpOULjyy-n8?rel=0"
+
+// 		return res.render('iframe',{
+// 			name: req.user[0].username,
+// 			link: link
+// 		})
+// 	} catch (error) {
+// 		console.log(error);
+
+// 		return res.send('Something went wrong');
+// 	}
+// });
+
 app.get('/deals/:id', async (req, res) => {
 	const randomBoolean = Math.random() >= 0.5;
 	const outcome = randomBoolean === true ? 'won' : 'lost';

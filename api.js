@@ -43,6 +43,22 @@ async function updateDeal(id, outcome, accessToken) {
 	await axios(requestOptions);
 }
 
+async function createDeal(id,accessToken) {
+	const requestOptions = {
+		url: `https://api.pipedrive.com/v1/deals/${id}`,
+		method: 'POST',
+		headers: {
+			'Authorization': `Bearer ${accessToken}`
+		},
+		data: {
+			status: outcome
+		},
+		timeout: 10000
+	};
+
+	await axios(requestOptions);
+}
+
 module.exports = {
 	getUser,
 	getDeals,
